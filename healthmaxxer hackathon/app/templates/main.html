@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthmaxxer.ai</title>
+    <link rel="website icon" href="static/docai.png" type="png">
+    <style>
+  :root {
+    --primary-blue: #2A5C99;
+    --primary-blue-hover: #1E4A7E;
+    --primary-blue-light: #4A90E2;
+    --primary-green: #4CAF50;
+    --bg-overlay: rgba(42, 92, 153, 0.7);
+    --sidebar-bg: #1A3A6B;
+    --white: #ffffff;
+    --text-color: #333333;
+    --text-muted: #6C757D;
+    --red-c: #ff4444:
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background: url('static/back.jpg') no-repeat fixed center/cover;
+    color: var(--text-color);
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    width: 60px;
+    background: var(--sidebar-bg);
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+  }
+
+  .sidebar img {
+    margin-top: 5px;
+    height: 50px;
+    width: 50px;
+    filter: brightness(0) invert(1); /* Turns image white */
+    opacity: 0.9; /* Optional: Adjust transparency */
+    transition: opacity 0.3s ease; /* Smooth hover effect */
+}
+
+.sidebar img:hover {
+    opacity: 1; /* Full white on hover */
+}
+    .logo h2{
+
+    color: var(--white);
+   }
+  #icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #icons i {
+    color: var(--white);
+    font-size: 1rem;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+  }
+
+  #icons i:hover {
+    color: var(--primary-blue-light);
+  }
+
+  .main-content {
+    margin-left: 60px;
+    flex-grow: 1;
+    background: var(--bg-overlay);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+  }
+
+  .hero-content {
+    padding-top: 10%;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+    #icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #icons i {
+            color: var(--white);
+            font-size: 1rem;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        #icons i:hover {
+            color: var(--primary-blue-light);
+        }
+  .hero h1 {
+    font-size: 2.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+.maxxer{
+color: #ff4444;
+}
+  .hero h1 span {
+    color:  #ff4444;
+
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    color: var(--white);
+  }
+
+  .buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-blue);
+    color: var(--white);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-blue-hover);
+  }
+
+  .btn-secondary {
+    background-color: var(--white);
+    color: var(--primary-blue);
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 60px);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+  }
+
+  .navbar a {
+    color: var(--white);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .navbar a:hover {
+    color: var(--primary-blue-light);
+  }
+.menu {
+    position: relative;
+    display: inline-block;
+    margin-left: auto; /* Pushes to the right if in flex container */
+}
+
+/* Logout Link */
+.menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #ff4444; /* Red color for logout action */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 68, 68, 0.1); /* Subtle red background */
+}
+
+/* Hover Effects */
+.menu a:hover {
+    background-color: rgba(255, 68, 68, 0.2);
+    color: #cc0000;
+    transform: translateY(-1px);
+}
+
+/* Active/Pressed State */
+.menu a:active {
+    transform: translateY(0);
+    background-color: rgba(255, 68, 68, 0.15);
+}
+
+/* Optional: Add an icon */
+.menu a::before {
+    content: "→"; /* Or use FontAwesome: "\f08b" */
+    margin-right: 8px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.menu a:hover::before {
+    transform: translateX(3px);
+}
+
+/* For positioning in top-right corner */
+.menu.top-right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .menu a {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+.health-platform {
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.platform-header h1 {
+  font-size: 2.5rem;
+  color: #2b3a4a;
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.ai-text {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.feature-cards {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.feature-card {
+  flex: 1;
+  min-width: 280px;
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-align: center;
+  border-top: 4px solid;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* Remove link decorations and style anchor tags */
+.link, .feature-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #2b3a4a;
+  position: relative;
+}
+
+.feature-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.feature-card:hover h3::after {
+  width: 60px;
+}
+
+.feature-card p {
+  color: #6c7a89;
+  line-height: 1.6;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.feature-card:hover p {
+  color: #4a5568;
+}
+
+/* Individual card colors */
+.diagnostic {
+  border-color: #6e8efb;
+  color: #6e8efb;
+}
+
+.consult {
+  border-color: #4ac29a;
+  color: #4ac29a;
+}
+
+.library {
+  border-color: #ff9a9e;
+  color: #ff9a9e;
+}
+
+/* Make all cards clickable */
+.feature-card {
+  position: relative;
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .feature-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feature-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+  .flash {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      height: auto;
+      width: 100%;
+      flex-direction: row;
+      padding: 10px;
+      justify-content: space-around;
+      position: relative;
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
+
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .navbar .menu {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+
+    .buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><img src="static/docai.png" alt="HealthMaxxer.ai logo"></a>
+        <div id="icons">
+            <a href="facebook.com"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="/"><i class="fa-solid fa-globe"></i></a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="hero">
+            <div class="navbar">
+                <div class="logo">
+                    <h2 >Health<span class="maxxer">Maxxer</span>.ai</h2>
+                </div>
+                {% if logged_in %}
+                <div class="menu">
+                    <a href="/logout">Logout</a>
+                </div>
+                {% endif %}
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% if logged_in %}
+                <div class="hero-content">
+                    <h1>Welcome to Health<span class="maxxer">Maxxer</span></h1>
+                    <p>Your AI-powered healthcare recommendation platform</p>
+
+                   <div class="feature-cards">
+                          <a href="/diagnostic-support" class="link">
+                            <div class="feature-card diagnostic">
+                              <div class="feature-icon">🩺</div>
+                              <h3>Diagnostic Support</h3>
+                              <p>AI-powered symptom analysis and clinical decision support</p>
+                            </div>
+                          </a>
+
+                          <a href="/find-doctors" class="link">
+                            <div class="feature-card consult">
+                              <div class="feature-icon">👨‍⚕️</div>
+                              <h3>Consult a doctor</h3>
+                              <p>Find the nearest doctor, pharmacy and Hospital</p>
+                            </div>
+                          </a>
+
+                          <a href="/therapist" class="link">
+                            <div class="feature-card library">
+                              <div class="feature-icon">📚</div>
+                              <h3>Therapist</h3>
+                              <p>Access to evidence-based research and guidelines</p>
+                            </div>
+                          </a>
+                        </div>
+                </div>
+            {% else %}
+                <div class="hero-content">
+                    <h1>WELCOME TO <span>HealthMaxxer</span></h1>
+                    <p>Experience the future of healthcare with our AI-powered assistance platform. Access intelligent diagnostic support, personalized treatment recommendations, and real-time clinical decision tools to enhance patient care.</p>
+                    <div class="buttons">
+                        <a href="/register"><button class="btn btn-primary">Get Started</button></a>
+                        <a href="/login"><button class="btn btn-secondary">Login</button></a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

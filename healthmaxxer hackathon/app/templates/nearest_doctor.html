@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearest Doctor</title>
+    <link rel="website icon" href="static/docai.png" type="png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+  /* Previous styles remain the same until .hero-content */
+:root {
+    --primary-blue: #2A5C99;
+    --primary-blue-hover: #1E4A7E;
+    --primary-blue-light: #4A90E2;
+    --primary-green: #4CAF50;
+    --bg-overlay: rgba(42, 92, 153, 0.7);
+    --sidebar-bg: #1A3A6B;
+    --white: #ffffff;
+    --text-color: #333333;
+    --text-muted: #6C757D;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    background: url('static/back.jpg') no-repeat fixed center/cover;
+    color: var(--text-color);
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    width: 60px;
+    background: var(--sidebar-bg);
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+  }
+
+  .sidebar img {
+    margin-top: 5px;
+    height: 50px;
+    width: 50px;
+    filter: brightness(0) invert(1); /* Turns image white */
+    opacity: 0.9; /* Optional: Adjust transparency */
+    transition: opacity 0.3s ease; /* Smooth hover effect */
+}
+    #icons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #icons i {
+            color: var(--white);
+            font-size: 1rem;
+            margin: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        #icons i:hover {
+            color: var(--primary-blue-light);
+        }
+.sidebar img:hover {
+    opacity: 1; /* Full white on hover */
+}
+    .logo h2{
+
+    color: var(--white);
+   }
+
+  #icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #icons i {
+    color: var(--white);
+    font-size: 1rem;
+    margin: 5px 0;
+    transition: color 0.3s ease;
+  }
+
+  #icons i:hover {
+    color: var(--primary-blue-light);
+  }
+
+  .main-content {
+    margin-left: 60px;
+    flex-grow: 1;
+    background: var(--bg-overlay);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+  }
+
+  .hero-content {
+
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+.maxxer{
+color: #ff4444;
+}
+  .hero h1 span {
+    color: var( --primary-green);
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    color: var(--white);
+  }
+  .widget-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
+  }
+
+  .doctor-list {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .map-container {
+    flex: 2;
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    height: 600px;
+  }
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 16px;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Custom dropdown arrow */
+.form-group::after {
+  content: "▼";
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Submit button */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #3d8b40;
+}
+  .doctor-card {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+  }
+
+  .doctor-card:last-child {
+    border-bottom: none;
+  }
+
+  .doctor-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .doctor-info {
+    flex: 1;
+  }
+
+  .doctor-name {
+    font-weight: bold;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+  }
+
+  .doctor-specialty {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+
+  .doctor-distance {
+    color: var(--primary-green);
+    font-size: 0.8rem;
+  }
+
+  .book-btn {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .book-btn:hover {
+    background: var(--primary-blue-hover);
+  }
+
+  @media (max-width: 768px) {
+    .widget-container {
+      flex-direction: column;
+    }
+
+    .doctor-list, .map-container {
+      width: 100%;
+    }
+  }
+        #map {
+            height: 100%;
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .map-info-window {
+            padding: 10px;
+        }
+        .map-info-window h3 {
+            margin: 0 0 5px 0;
+            color: var(--primary-blue);
+        }
+</style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChswIpHXtx3fxAwHxlay4w3w8KlAxb5K0&libraries=places"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><img src="static/docai.png" alt="HealthMaxxer.ai logo"></a>
+        <div id="icons">
+            <a href="facebook.com"><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="/"><i class="fa-solid fa-globe"></i></a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="hero">
+            <div class="navbar">
+                <div class="logo">
+                    <h2 style="color: white;">Health<span class="maxxer">Maxxer</span>.ai</h2>
+                </div>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+                <div class="hero-content">
+                    <h1>Find <span>Nearby Doctors</span></h1>
+
+ <div class="widget-container">
+        <!-- Doctor List Widget (unchanged) -->
+        <div class="doctor-list">
+            <h2>Available</h2>
+            <form method="POST" action="/find-doctors">
+  <div class="form-group">
+    <select name="type"  required>
+      <option value="" disabled selected>Select type</option>
+      <option value="doctor">Doctor</option>
+      <option value="hospital">Hospital</option>
+      <option value="pharmacy">Pharmacy</option>
+    </select>
+  </div>
+  <button type="submit">Submit</button>
+</form>
+            {% for doctor in doctors %}
+            <div class="doctor-card" onclick="focusOnDoctor({{ loop.index0 }})">
+    <div class="doctor-avatar">{{ doctor.name[0] }}</div>
+    <div class="doctor-info">
+        <div class="doctor-name">{{ doctor.name }}</div>
+        <div class="doctor-specialty">{{ doctor.address }}</div>
+        <div class="doctor-distance">
+            {{ doctor.distance }} • {{ doctor.duration }} • Rating: {{ doctor.rating }}
+        </div>
+    </div>
+    <button class="book-btn">Directions</button>
+</div>
+            {% endfor %}
+        </div>
+
+        <!-- Map Widget -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>                </div>
+
+        </div>
+    </div>
+
+    <script>
+          let map;
+        let markers = [];
+
+        function initMap() {
+            const userLocation = { lat: {{ user_latitude }}, lng: {{ user_longitude }} };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: userLocation,
+                zoom: 14
+            });
+
+            // Add user marker
+            new google.maps.Marker({
+                position: userLocation,
+                map: map,
+                title: "Your Location",
+                icon: {
+                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                }
+            });
+
+            // Add doctor markers
+            const doctors = [
+                {% for doctor in doctors %}
+                {
+                    name: "{{ doctor.name }}",
+                    address: "{{ doctor.address }}",
+                    position: { lat: {{ doctor.latitude }}, lng: {{ doctor.longitude }} },
+                    rating: "{{ doctor.rating }}"
+                },
+                {% endfor %}
+            ];
+
+            doctors.forEach((doctor, index) => {
+                const marker = new google.maps.Marker({
+                    position: doctor.position,
+                    map: map,
+                    title: doctor.name
+                });
+
+                markers.push(marker);
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div class="map-info-window">
+                            <h3>${doctor.name}</h3>
+                            <p>${doctor.address}</p>
+                            <p>Rating: ${doctor.rating}</p>
+                        </div>
+                    `
+                });
+
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+
+        // Center map on specific doctor
+        function focusOnDoctor(index) {
+            if (markers[index]) {
+                map.setCenter(markers[index].getPosition());
+                map.setZoom(16);
+                new google.maps.InfoWindow({
+                    content: markers[index].getTitle()
+                }).open(map, markers[index]);
+            }
+        }
+
+        // Initialize map when page loads
+        window.onload = initMap;
+    </script>
+</body>
+</html>
